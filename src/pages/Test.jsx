@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Progess from "../components/Progess";
 import Question from "../components/Question";
 import Answer from "../components/Answer";
-import { initialMbtiQuestion } from "../data/initialState";
+import { initialMbtiAnswer, initialMbtiQuestion } from "../data/initialState";
 import { mbtiQuestionList } from "../data/response";
 
 const Test = () => {
@@ -32,6 +32,7 @@ const Test = () => {
 
   const [currentStep, setCurrentStep] = useState(1);
   const [mbtiQuestion, setMbtiQuestion] = useState(initialMbtiQuestion);
+  const [mbtiAnswer, setMbtiAnswer] = useState(initialMbtiAnswer);
 
   const { step, questionText } = mbtiQuestion;
 
@@ -46,7 +47,11 @@ const Test = () => {
     const nextQuestion = mbtiQuestionList.find(
       (item) => item.step === currentStep
     ); // undefined
+
+    // question데이터 변경
     nextQuestion && setMbtiQuestion(nextQuestion);
+
+    // answerData 변경
   }, [currentStep]);
 
   // 2. 진입 시 딱 한번만 실행
@@ -69,7 +74,7 @@ const Test = () => {
       <Question text={questionText} step={step} />
       {/* END: Question 컴포넌트 */}
       {/* START: Answer 컴포넌트 */}
-      <Answer onAnswerClick={hanleAnswerClick} />
+      <Answer data={mbtiAnswer} onAnswerClick={hanleAnswerClick} />
       {/* END: Answer 컴포넌트 */}
     </section>
   );
