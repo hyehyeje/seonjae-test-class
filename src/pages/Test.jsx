@@ -3,22 +3,31 @@ import Progess from "../components/Progess";
 import Question from "../components/Question";
 import Answer from "../components/Answer";
 import { initialMbtiQuestion } from "../data/initialState";
-import { mbtiQuestionList } from "../data/resonse";
+import { mbtiQuestionList } from "../data/response";
 
 const Test = () => {
   // logic
 
   /*
-  mbtiQuestion
+  mbtiAnswer
   {
     id: 1,
-    step: 1,
-    nextStep: 2,
+    questionStep: 1,
+    questionNextStep: 2,
     questionType: "EI",
-    firstType: "E",
-    lastType: "I",
-    questionText: "선재가 이클립스 공연에 당신을 초대한다면?",
-  }
+    answerList: [
+      {
+        code: 0,
+        type: "E",
+        text: "꺄아! 당연히 가서 떼창도 하고 다른 팬들이랑 같이 즐겨야지!",
+      },
+      {
+        code: 1,
+        type: "I",
+        text: "선재가 날 초대해 주다니..오로지 선재에게만 집중하고 싶어",
+      },
+    ],
+  },
   */
 
   const [currentStep, setCurrentStep] = useState(1);
@@ -36,8 +45,8 @@ const Test = () => {
     // state 변경시 실행될 실행문
     const nextQuestion = mbtiQuestionList.find(
       (item) => item.step === currentStep
-    );
-    setMbtiQuestion(nextQuestion);
+    ); // undefined
+    nextQuestion && setMbtiQuestion(nextQuestion);
   }, [currentStep]);
 
   // 2. 진입 시 딱 한번만 실행
@@ -49,9 +58,6 @@ const Test = () => {
   useEffect(() => {
     // 페이지에서 하나의 state라도 변경될때 실행될 실행문
   });
-
-  // 1. answer버튼 클릭 이벤트 잡기
-  // 2. mbtiQuestion.step 값 변경
 
   // view
   return (
