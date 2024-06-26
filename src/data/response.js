@@ -152,4 +152,40 @@ export const mbtiAnswerList = [
       },
     ],
   },
+  {
+    id: 2,
+    questionStep: 2,
+    questionNextStep: 3,
+    questionType: "EI",
+    answerList: [
+      {
+        code: 0,
+        type: "E",
+        text: "네가 내 별이다. 너라는 존재 자체가 나에게 큰 의미야",
+      },
+      {
+        code: 1,
+        type: "I",
+        text: "우리 서로에게 좋은 영향을 주는 관계가 되자",
+      },
+    ],
+  },
+  {
+    id: 3,
+    questionStep: 3,
+    questionNextStep: 4,
+    questionType: "NS",
+    answerList: [
+      {
+        code: 0,
+        type: "N",
+        text: "그 전에 현재의 문제를 해결하는 게 먼저야",
+      },
+      {
+        code: 1,
+        type: "S",
+        text: "과거로 돌아가면 미래를 바꿀 수 있을지도 몰라!",
+      },
+    ],
+  },
 ];
