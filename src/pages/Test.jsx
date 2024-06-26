@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import Progess from "../components/Progess";
 import Question from "../components/Question";
 import Answer from "../components/Answer";
+import { initialMbtiQuestion } from "../data/initialState";
 
 const Test = () => {
   // logic
   const [step, setStep] = useState(1);
+
+  const [mbtiQuestion, setMbtiQuestion] = useState(initialMbtiQuestion);
 
   const hanleAnswerClick = () => {
     setStep(step + 1);
