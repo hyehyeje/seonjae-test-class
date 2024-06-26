@@ -3,32 +3,12 @@ import Progess from "../components/Progess";
 import Question from "../components/Question";
 import Answer from "../components/Answer";
 import { initialMbtiAnswer, initialMbtiQuestion } from "../data/initialState";
-import { mbtiQuestionList } from "../data/response";
+import { mbtiAnswerList, mbtiQuestionList } from "../data/response";
+import { useNavigate } from "react-router-dom";
 
 const Test = () => {
   // logic
-
-  /*
-  mbtiAnswer
-  {
-    id: 1,
-    questionStep: 1,
-    questionNextStep: 2,
-    questionType: "EI",
-    answerList: [
-      {
-        code: 0,
-        type: "E",
-        text: "꺄아! 당연히 가서 떼창도 하고 다른 팬들이랑 같이 즐겨야지!",
-      },
-      {
-        code: 1,
-        type: "I",
-        text: "선재가 날 초대해 주다니..오로지 선재에게만 집중하고 싶어",
-      },
-    ],
-  },
-  */
+  const history = useNavigate();
 
   const [currentStep, setCurrentStep] = useState(1);
   const [mbtiQuestion, setMbtiQuestion] = useState(initialMbtiQuestion);
@@ -37,12 +17,19 @@ const Test = () => {
   const { step, questionText } = mbtiQuestion;
 
   const hanleAnswerClick = () => {
-    setCurrentStep(currentStep + 1);
+    currentStep < 12 ? setCurrentStep(currentStep + 1) : goResult();
     // state업데이트 안함
+
+    // 12까지만
+  };
+
+  const goResult = () => {
+    history("/result");
   };
 
   // 1. 원하는 state 감시
   useEffect(() => {
+    console.log("current", currentStep);
     // state 변경시 실행될 실행문
     const nextQuestion = mbtiQuestionList.find(
       (item) => item.step === currentStep
@@ -52,6 +39,10 @@ const Test = () => {
     nextQuestion && setMbtiQuestion(nextQuestion);
 
     // answerData 변경
+    const nextAnswer = mbtiAnswerList.find(
+      (answer) => answer.questionStep === currentStep
+    );
+    nextAnswer && setMbtiAnswer(nextAnswer);
   }, [currentStep]);
 
   // 2. 진입 시 딱 한번만 실행
