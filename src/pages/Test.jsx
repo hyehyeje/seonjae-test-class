@@ -18,7 +18,10 @@ const Test = () => {
       <Progess />
       {/* END: Progress 컴포넌트 */}
       {/* START: Question 컴포넌트 */}
-      <Question text={"후츠릿"} step={step} />
+      <Question
+        text={"선재가 이클립스 공연에 당신을 초대한다면?"}
+        step={step}
+      />
       {/* END: Question 컴포넌트 */}
       {/* START: Answer 컴포넌트 */}
       <Answer onAnswerClick={hanleAnswerClick} />
