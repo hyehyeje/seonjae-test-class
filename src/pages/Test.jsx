@@ -17,10 +17,9 @@ const Test = () => {
   const { step, questionText } = mbtiQuestion;
 
   const hanleAnswerClick = () => {
+    // 12까지만 증가하고 12일때는 증가 안함
     currentStep < 12 ? setCurrentStep(currentStep + 1) : goResult();
     // state업데이트 안함
-
-    // 12까지만
   };
 
   const goResult = () => {
