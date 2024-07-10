@@ -24,7 +24,6 @@ const Home = () => {
 
   const goTest = () => {
     history("/test");
-    console.log("test");
   };
 
   // view
