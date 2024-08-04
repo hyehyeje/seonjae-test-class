@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
-import Progess from "../components/Progess";
+import React, { useCallback, useEffect, useState } from "react";
 import Question from "../components/Question";
 import Answer from "../components/Answer";
 import { initialMbtiAnswer, initialMbtiQuestion } from "../data/initialState";
 import { mbtiAnswerList, mbtiQuestionList } from "../data/response";
 import { useNavigate } from "react-router-dom";
+import Progress from "../components/Progress";
 
 const Test = () => {
   // logic
+  const totalStep = 12;
   const history = useNavigate();
 
   const [currentStep, setCurrentStep] = useState(1);
@@ -18,13 +19,25 @@ const Test = () => {
 
   const hanleAnswerClick = () => {
     // 12까지만 증가하고 12일때는 증가 안함
-    currentStep < 12 ? setCurrentStep(currentStep + 1) : goResult();
-    // state업데이트 안함
+    setCurrentStep(currentStep + 1);
+
+    // TODO: mbtiResult 담기
+
+    // 1. mbtiResultList에 첫 데이터 추가
+    // 2. 담긴 mbtiReulstList중에 이미 존재하는 questionType이 있는지 체크
+    // 3. 체크한 값이 true: resultValue의 [firstType]의 값을
+    // 4. 체크한 값이 false: mbtiReulstList에 객체 추가
   };
 
-  const goResult = () => {
+  const goResult = useCallback(() => {
     history("/result");
-  };
+
+    //TODO: onMovePage시 mbtiResultList데이터 보내기
+  }, [history]);
+
+  useEffect(() => {
+    currentStep > totalStep && goResult();
+  }, [currentStep, goResult]);
 
   // 1. 원하는 state 감시
   useEffect(() => {
@@ -58,7 +71,7 @@ const Test = () => {
   return (
     <section className="h-full py-12 flex flex-col justify-between">
       {/* START: Progress 컴포넌트 */}
-      <Progess />
+      <Progress totalStep={totalStep} currentStep={currentStep} />
       {/* END: Progress 컴포넌트 */}
       {/* START: Question 컴포넌트 */}
       <Question text={questionText} step={step} />

@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const Progess = () => {
+const Progress = ({ totalStep, currentStep }) => {
+  // logic
+  const width = (currentStep / totalStep) * 100;
+
+  // view
   return (
     <div className="w-full h-6 bg-white border-2 rounded-xl border-mbti-gray relative">
       <div
         className="absolute w-11 top-1/2 transition-all transform -translate-x-1/2 -translate-y-1/2"
-        style={{ left: "10%" }}
+        style={{ left: `${width}%` }}
       >
         <img
           src="./images/progress.png"
@@ -16,7 +20,7 @@ const Progess = () => {
       <div className="w-full h-full rounded-xl overflow-hidden">
         <span
           className="block h-full bg-mbti-pink transition-all"
-          style={{ width: `calc(10% + 5px)` }}
+          style={{ width: `calc(${width}% + 5px)` }}
         ></span>{" "}
         {/* status */}
       </div>
@@ -24,4 +28,4 @@ const Progess = () => {
   );
 };
 
-export default Progess;
+export default Progress;
